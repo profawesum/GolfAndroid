@@ -43,5 +43,12 @@ namespace UnityStandardAssets.Vehicles.Ball
                 m_Rigidbody.AddForce(Vector3.up*m_JumpPower, ForceMode.Impulse);
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "LevelEnd") {
+                m_Rigidbody.AddForce(Vector3.up * 15, ForceMode.Impulse);
+            }
+        }
     }
 }

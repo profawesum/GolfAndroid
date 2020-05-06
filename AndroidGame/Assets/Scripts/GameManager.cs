@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    IEnumerator ExampleCoroutine()
+    {
+
+        Debug.Log("Coroutine");
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(1.5f);
+        Application.LoadLevel("LevelSelect");
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "KillFloor")
@@ -13,7 +24,8 @@ public class GameManager : MonoBehaviour
         }
         if (other.tag == "LevelEnd") {
             //load into level select screen
-            Application.LoadLevel("LevelSelect");
+            StartCoroutine(ExampleCoroutine());
+           
         }
     }
 }

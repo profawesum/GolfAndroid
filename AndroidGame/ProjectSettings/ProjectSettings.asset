@@ -759,10 +759,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 2fa4423d-d0c9-4173-af7b-c36ede90b63d
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: AndroidGame
+  organizationId: profawesum
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

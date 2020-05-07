@@ -1,17 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
+using UnityEngine.Advertisements;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
 
+    float timer;
+    public GameObject timerGO;
+    public Text timerText;
+
+    public int level;
+
+    bool timerToGo = true;
+
+    public void restart() {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+    public void home() {
+        Application.LoadLevel("LevelSelect");
+    }
 
     private void Start()
     {
+        timerText = timerGO.GetComponent<Text>();
         int gameplayCount = PlayerPrefs.GetInt("GameplayCount");
 
-        if (gameplayCount >= 2) {
+        if (gameplayCount >= 5) {
             gameplayCount = 0;
             PlayerPrefs.SetInt("GameplayCount", gameplayCount);
             showAd();
@@ -39,12 +56,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (timerToGo)
+        {
+            timer += Time.deltaTime;
+            timerText.text = "Time: " + timer.ToString("F2");
+        }
+    }
+
     IEnumerator WaitforEnd()
     {
+        timerToGo = false;
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetFloat("TimeTaken", timer);
+        PlayerPrefs.SetInt("LevelUnlocked", level);
         //yield on a new YieldInstruction that waits for 1.5 seconds.
         yield return new WaitForSeconds(1.5f);
-        //load the level select
-        Application.LoadLevel("LevelSelect");
+        //load the level complete scene
+        Application.LoadLevel("LevelWin");
 
     }
 
